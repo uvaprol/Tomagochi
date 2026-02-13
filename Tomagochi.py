@@ -1,15 +1,9 @@
 from random import randint as rd
+import pygame
 
 class Tomagochi():
-    __hp = 100
-    __potion = 0
-    __hapy = 100
-    __poo = False
-    __hungry = 0
 
-    def __init__(self, name, type='cat'):
-        self.__name = name
-        self.__type = type
+
 
     def give_food(self):
         self.__hungry += 10
@@ -50,4 +44,24 @@ class Tomagochi():
                self.__hungry
 
 class Cat(Tomagochi):
-    __face: str
+    __face: str = ['cat/Спрайт-0001.png',
+                   'cat/Спрайт-0002.png',
+                   'cat/Спрайт-0003.png',
+                   'cat/Спрайт-0004.png',
+                   'cat/Спрайт-0005.png']
+    def __init__(self, name, type='cat'):
+        self.__name = name
+        self.__type = type
+        self.__hp = 100
+        self.__potion = 0
+        self.__hapy = 100
+        self.__poo = False
+        self.__hungry = 0
+    def get_face(self):
+        face = 0
+        if self.__hapy >= 80 or True:
+            face = 0
+        if self.__hungry <= 80:
+            face = 1
+        img = pygame.image.load(self.__face[face])
+        return img

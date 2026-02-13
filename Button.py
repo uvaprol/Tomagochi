@@ -17,22 +17,23 @@ class Button(pygame.Rect):
           self.default_color = color
           self.default_text_color = text_color
           self.__font = pygame.font.SysFont("None", 32)
+          self.active = False
 
      def draw(self, surface):
           pygame.draw.rect(surface, self.color, self)
           surface.blit(self.__font.render(self.text, True, self.text_color),
                        [self.x + 5, self.y + 5])
 
-     def colision(self, x, y, mode=0):
-          # mode 0 passive
-          # mode 1 hover
-          # mode 2 active
+     def colision(self, x, y, on_press=False, realise=False):
+          if realise:
+               self.active = False
           if self.x <= x <= self.x + self.width \
                and self.y <= y <= self.y + self.height:
-               if mode == 1:
+               if not on_press:
+                    self.text_color = self.default_text_color
                     self.color = (max(0, self.default_color[0] - 50), max(0, self.default_color[1] - 50), max(0, self.default_color[2] - 50))
-                    print(self.color)
-               elif mode == 2:
+               elif on_press and not self.active:
+                    self.active = True
                     self.func()
                     self.text_color, self.color = self.color, self.text_color
                return True

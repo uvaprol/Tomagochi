@@ -1,8 +1,10 @@
 import pygame
 from Button import Button
+from Tomagochi import *
 pygame.init()
 display = pygame.display.set_mode((560, 400))
 
+toma = Cat('Bars')
 
 # создание кнопок
 hp_btn =     Button(10,  340, 100, 50, text='Лечить',  func=lambda: print('Лечить'))
@@ -14,6 +16,7 @@ hungry_btn = Button(450, 340, 100, 50, text='Кормить', func=lambda: print
 # рисуем кнопки
 def render():
      display.fill((100, 100, 100))
+     display.blit(toma.get_face(), (0, 0))
      hp_btn.draw(display)
      potion_btn.draw(display)
      happy_btn.draw(display)
@@ -24,15 +27,25 @@ def render():
 while True:
      render()
      for e in pygame.event.get():
-          hp_btn.colision(*pygame.mouse.get_pos(), mode=1)
-          potion_btn.colision(*pygame.mouse.get_pos(), mode=1)
-          happy_btn.colision(*pygame.mouse.get_pos(), mode=1)
-          poo_btn.colision(*pygame.mouse.get_pos(), mode=1)
-          hungry_btn.colision(*pygame.mouse.get_pos(), mode=1)
+          if e.type == pygame.QUIT:
+               pygame.quit()
+               quit()
           if e.type == pygame.MOUSEBUTTONDOWN:
-               # проверяем нажатие кнопки
-               hp_btn.colision(*pygame.mouse.get_pos(), mode=2)
-               potion_btn.colision(*pygame.mouse.get_pos(), mode=2)
-               happy_btn.colision(*pygame.mouse.get_pos(), mode=2)
-               poo_btn.colision(*pygame.mouse.get_pos(), mode=2)
-               hungry_btn.colision(*pygame.mouse.get_pos(), mode=2)
+               hp_btn.colision(*pygame.mouse.get_pos(), on_press=True)
+               potion_btn.colision(*pygame.mouse.get_pos(), on_press=True)
+               happy_btn.colision(*pygame.mouse.get_pos(), on_press=True)
+               poo_btn.colision(*pygame.mouse.get_pos(), on_press=True)
+               hungry_btn.colision(*pygame.mouse.get_pos(), on_press=True)
+          elif e.type == pygame.MOUSEBUTTONUP:
+               hp_btn.colision(*pygame.mouse.get_pos(), realise=True)
+               potion_btn.colision(*pygame.mouse.get_pos(), realise=True)
+               happy_btn.colision(*pygame.mouse.get_pos(), realise=True)
+               poo_btn.colision(*pygame.mouse.get_pos(), realise=True)
+               hungry_btn.colision(*pygame.mouse.get_pos(), realise=True)
+          else:
+               hp_btn.colision(*pygame.mouse.get_pos())
+               potion_btn.colision(*pygame.mouse.get_pos())
+               happy_btn.colision(*pygame.mouse.get_pos())
+               poo_btn.colision(*pygame.mouse.get_pos())
+               hungry_btn.colision(*pygame.mouse.get_pos())
+
