@@ -7,15 +7,30 @@ class Tomagochi():
       __energy = 100
       __poo = False
       __face = {
-            'happy': '',
-            'sad': '',
-            'hungry': '',
-            'sick': '',
-            'sleepy': '',
-            'dirty': '',
+            'happy': 'cat/happy.png',
+            'sad': 'cat/sad.png',
+            'hungry': 'cat/hungry.png',
+            'sick': 'cat/sick.png',
+            'sleepy': 'cat/sleepy.png',
+            'dirty': 'cat/dirty.png',
       }
       def __init__(self):
             self.__action()
+
+      def get_face(self):
+            face = 'happy'
+            if self.__vibe >= 80:
+                  face = 'happy'
+            else:
+                  face = 'sad'
+            if self.__golod <= 50:
+                  face = 'hungry'
+            if self.__poo:
+                  face = 'dirty'
+            if self.__energy <= 30:
+                  face = 'sleepy'
+            return pygame.image.load(self.__face[face])
+
       def dat_poest(self):
             self.__golod += 10
             self.__action()
