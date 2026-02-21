@@ -3,7 +3,7 @@ import pygame
 class Tomagochi():
       __golod = 100
       __hp = 100
-      __vibe = 100
+      __vibe = 50
       __energy = 100
       __poo = False
       __face = {
@@ -15,7 +15,7 @@ class Tomagochi():
             'dirty': 'cat/dirty.png',
       }
       def __init__(self):
-            self.__action()
+            self.action()
 
       def get_face(self):
             face = 'happy'
@@ -33,20 +33,20 @@ class Tomagochi():
 
       def dat_poest(self):
             self.__golod += 10
-            self.__action()
+            self.action()
       def polechit(self):
             self.__hp += 10
-            self.__action()
+            self.action()
       def pogladit(self):
             self.__vibe += 10
-            self.__action()
+            self.action()
       def polozit_spat(self):
             self.__energy = 100
-            self.__action()
+            self.action()
       def pochistit(self):
             self.__poo = False
-            self.__action()
-      def __action(self):
+            self.action()
+      def action(self):
             action = randint(0, 5)
             if action == 0:
                   self.__golod -= 20

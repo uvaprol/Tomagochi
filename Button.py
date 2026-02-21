@@ -41,6 +41,7 @@ class Button(pygame.Rect):
                 self.color = (max(0, self.default_color[0] - 50),
                               max(0, self.default_color[1] - 50),
                               max(0, self.default_color[2] - 50))
+                self.text_color = self.default_text_color
             return True
         else:
             self.active_status = False
