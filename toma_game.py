@@ -32,8 +32,11 @@ def render():
     pygame.display.flip()
 
 if __name__ == '__main__':
+    time_point = datetime.now()
     while True:
-
+        if (datetime.now() - time_point).total_seconds() >= 10:
+            TOMA.action()
+            time_point = datetime.now()
         render()
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
